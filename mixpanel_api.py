@@ -27,7 +27,7 @@ class Mixpanel(object):
  
     def request(self, params, format = 'json'):
         '''let's craft the http request'''
-        params['api_key']=self.api_key
+        params['api_key']= self.api_key
         params['expire'] = int(time.time())+10000 # 600 is ten minutes from now
         if 'sig' in params: del params['sig']
         params['sig'] = self.hash_args(params)
@@ -97,15 +97,15 @@ class Mixpanel(object):
         payload = {"data":base64.b64encode(json.dumps(batch).encode('utf-8')), "verbose":1,"api_key":self.api_key}
  
         #response = urllib.request.urlopen(url, urllib.parse.urlencode(payload).encode("utf-8"))
-        print("1")
+        #print("1")
         data = urllib.parse.urlencode(payload)
-        print("2")
+        #print("2")
         data = data.encode('utf-8')
-        print("3")
+        #print("3")
         req = urllib.request.Request(url)
-        print("4")
+        #print("4")
         response = urllib.request.urlopen(req, data=data)
-        print("5")
+        #print("5")
         message = response.read()
  
         '''if something goes wrong, this will say what'''
@@ -133,7 +133,7 @@ def deleteUsers(project):
                 'session_id' : json.loads(response.decode('utf-8'))['session_id'],
                 'page':0
                 })
-    print('try')
+    #print('try')
     global_total = json.loads(response.decode('utf-8'))['total']
  
     print("Here are the # of people %d" % global_total)
@@ -143,7 +143,7 @@ def deleteUsers(project):
     print(fname)
     f = open(fname, 'w')
     while has_results:
-        print('maybe')
+        #print('maybe')
         responser = json.loads(response.decode('utf-8'))['results']
         total += len(responser)
         has_results = len(responser) == 1000
